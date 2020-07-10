@@ -5,7 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <title>Control</title>
+  <title>Patient Montring System</title>
+  <link rel="manifest" href="pwa/manifest.webmanifest">
   <style>
   body {
     overflow-x: hidden;
