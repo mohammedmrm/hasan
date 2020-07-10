@@ -291,7 +291,15 @@ canvas {
 <?php include("footer.php"); ?>
  <!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
-     <script type="text/javascript">
+      <script>
+      // Check that service workers are supported
+      if ('serviceWorker' in navigator) {
+         window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+        });
+      }
+      </script>
+  <script type="text/javascript">
 
             var canvas = document.getElementById("ecg");
             var ctx = canvas.getContext("2d");
