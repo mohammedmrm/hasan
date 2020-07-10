@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require("script/dbconnection.php");
 $sql = "select id from admin";
