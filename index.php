@@ -351,7 +351,7 @@ canvas {
           url:"script/_getCurrentReads.php",
           data:{dev:d},
           success:function(res){
-            console.log(res);
+             
            $.each(res.data,function(){
             gaugeData.setValue(0, 0, this.temp);
             gauge.draw(gaugeData, gaugeOptions);
@@ -374,8 +374,8 @@ canvas {
             dataType: "json",
             data:{dev:d},
             async: false,
-            success:function(res){console.log(res);},
-            error:function(res){console.log(res);}
+            success:function(res){ },
+            error:function(res){ }
             }).responseText;
 
         // Create our data table out of JSON data loaded from server.
@@ -406,8 +406,8 @@ canvas {
             dataType: "json",
             data:{dev:d},
             async: false,
-            success:function(res){console.log(res);},
-            error:function(res){console.log(res);}
+            success:function(res){ },
+            error:function(res){ }
             }).responseText;
         // Create our data table out of JSON data loaded from server.
         var data = new google.visualization.DataTable(jsonData);
@@ -434,7 +434,7 @@ canvas {
           url:"script/_getDevices.php",
           type:"POST",
           success:function(res){
-           console.log(res);
+            
            $.each(res.data,function(){
              $("#devices").append(
              '<option value="'+this.id+'">'+this.name+'</option>'
@@ -475,7 +475,7 @@ canvas {
         $.ajax({
           url:"script/randomreads.php",
           success:function(res){
-           console.log(res);
+            
           },
           error:function(e){
            console.log(e);
