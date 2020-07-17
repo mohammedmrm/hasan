@@ -3,10 +3,13 @@ header('Content-type:application/json');
 session_start();
 require_once("dbconnection.php");
 
-$t1 = rand(0,120); //Temperature
-$h1 = rand(0,100); //Humidity
-   $sql = "insert into measurement (d_id,m_id,t1,h1) values(?,?,?,?)";
-   $result = setData($con,$sql,[1,1,$t1,$h1]);
+$temp = rand(10,70); //Temperature
+$ox   = rand(10,100); //Humidity
+$beat= rand(10,100); //Humidity
+$emg = rand(0,100)/100; //Humidity
+$ecg = rand(0,100)/100; //Humidity
+   $sql = "insert into records (dev_id,patient_id,temp,oxygen,beat,emg,ecg) values(?,?,?,?,?,?,?)";
+   $result = setData($con,$sql,[1,1,$temp,$ox,$beat,$emg,$ecg]);
    if($result == 1){
     $msg = "Temperature and Humidity recorded";
    }

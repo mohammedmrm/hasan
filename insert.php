@@ -1,7 +1,7 @@
 ﻿<?php
 header('Content-type:application/json;charset=windows-1256');
 require_once("script/dbconnection.php");
-//error_reporting(0);
+error_reporting(0);
 $temp = $_REQUEST['temp']; //Temperature
 $ox   = $_REQUEST['ox']; //oxygen
 $beat = $_REQUEST['beat']; //heart Beat

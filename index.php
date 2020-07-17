@@ -26,10 +26,10 @@
     border: 2px solid red;
   }
 
-  #temperature{
+  #ecg{
     height: 300px;
   }
-  #humidity{
+  #emg{
     height: 300px;
   }
 
@@ -118,7 +118,7 @@
   .thresholds {
     cursor: pointer;
   }
-   #linehumi, #linetemp {
+   #lineemg, #lineecg {
      min-height: 350px;
    }
 
@@ -207,9 +207,7 @@ canvas {
   font-size: 0;
   background:transparent;
 }
- #ecg {
-   background-color: #222222;
- }
+
 
   </style>
   </head>
@@ -223,9 +221,10 @@ canvas {
    <div class="col-md-12 dev">
      <div class="form-group">
        <label class="col-sm-4"> Patient </label>
-       <select class="form-control selectpicker" data-live-search="true" id="devices">
+       <select class="form-control selectpicker" onchange="changeReads($(this).val())" data-live-search="true" id="devices">
           <option>-- select Patient --</option>
        </select>
+       <input type="checkbox" id="active" value="Active Random Reads"/> Active Random Reads
      </div>
    </div>
    <div class="col-md-12">
@@ -263,27 +262,23 @@ canvas {
         <div class="col-sm-12"><hr /></div>
     </div>
     <div class="row">
-        <div class="col-sm-6"><h1>ECG</h1>
-            <canvas id="ecg"></canvas>
+        <div class="col-sm-4"><h3>Oxygen</h3>
+          <div id="oxygen"></div>
         </div>
-        <div class="col-sm-6"> <h1>Patient Report </h1>
-           <div class="colsm-6">
-             <h3><label>Blood Prasure</label>
-             <label>113/78</label></h3>
-           </div>
-           <div class="colsm-6">
-             <h3><label>glucose</label>
-             <label>130</label></h3>
-           </div>
-           <div class="colsm-6">
-             <h3><label>Body Temprature</label>
-             <label>36</label></h3>
-           </div>
-           <div class="colsm-6">
-             <h3><label>Heart beat</label>
-              <label>66</label> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></h3>
-           </div>
-
+        <div class="col-sm-4"><h3>Temprture</h3>
+           <div id="temperature"></div>
+        </div>
+        <div class="col-sm-4"><h3>Heart Beat</h3>
+           <div id="beat"></div>
+        </div>
+    </div>
+        <hr />
+    <div class="row">
+        <div class="col-sm-6"><h1>ECG</h1>
+            <div id="ecg"></div>
+        </div>
+        <div class="col-sm-6"><h1>EMG</h1>
+            <div id="emg"></div>
         </div>
     </div>
   </div>
@@ -291,6 +286,203 @@ canvas {
 </div>
 <?php include("footer.php"); ?>
  <!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
+ <script type="text/javascript" src="bootstrap-4.3.1-dist/js/charts.js"></script>
+ <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(temperature);
+      google.charts.setOnLoadCallback(oxygen);
+      google.charts.setOnLoadCallback(beat);
+
+      var gaugeOptions = {
+           height: 200,
+          redFrom: 70, redTo: 120,
+          yellowFrom:40, yellowTo: 70,
+          greenFrom:30,greenTo:40,
+          minorTicks: 5 , max :120
+        };
+      function temperature() {
+      gaugeData = new google.visualization.DataTable();
+      gaugeData.addColumn('number', 'Temperture');
+      gaugeData.addRows(1);
+      gaugeData.setCell(0, 0,0);
+
+      gauge = new google.visualization.Gauge(document.getElementById('temperature'));
+      gauge.draw(gaugeData, gaugeOptions);
+
+      }
+      var gaugeOptions2 = {
+          height: 200,
+          redFrom: 70, redTo: 100,
+          yellowFrom:40, yellowTo: 70,
+          greenFrom:30,greenTo:40,
+          minorTicks: 5 , max :100
+        };
+      function oxygen() {
+      gaugeData2 = new google.visualization.DataTable();
+      gaugeData2.addColumn('number', 'Oxygen');
+      gaugeData2.addRows(1);
+      gaugeData2.setCell(0, 0,0);
+
+      gauge2 = new google.visualization.Gauge(document.getElementById('oxygen'));
+      gauge2.draw(gaugeData2, gaugeOptions2);
+
+      }
+      var gaugeOptions3 = {
+          height: 200,
+          redFrom: 70, redTo: 100,
+          yellowFrom:40, yellowTo: 70,
+          greenFrom:30,greenTo:40,
+          minorTicks: 5 , max :100
+        };
+      function beat() {
+      gaugeData3 = new google.visualization.DataTable();
+      gaugeData3.addColumn('number', 'Heart Beat');
+      gaugeData3.addRows(1);
+      gaugeData3.setCell(0, 0,0);
+
+      gauge3 = new google.visualization.Gauge(document.getElementById('beat'));
+      gauge3.draw(gaugeData3, gaugeOptions3);
+
+      }
+      function changeReads(d) {
+        $.ajax({
+          url:"script/_getCurrentReads.php",
+          data:{dev:d},
+          success:function(res){
+            console.log(res);
+           $.each(res.data,function(){
+            gaugeData.setValue(0, 0, this.temp);
+            gauge.draw(gaugeData, gaugeOptions);
+            gaugeData2.setValue(0, 0, this.oxygen);
+            gauge2.draw(gaugeData2, gaugeOptions2);
+            gaugeData3.setValue(0, 0, this.beat);
+            gauge3.draw(gaugeData3, gaugeOptions3);
+           });
+          },
+          error:function(e){
+          console.log(e);
+          }
+        });
+     }
+     google.charts.setOnLoadCallback(lineecg);
+
+      function lineecg(d) {
+        var jsonData = $.ajax({
+            url: "script/_getemg.php",
+            dataType: "json",
+            data:{dev:d},
+            async: false,
+            success:function(res){console.log(res);},
+            error:function(res){console.log(res);}
+            }).responseText;
+
+        // Create our data table out of JSON data loaded from server.
+        var data = new google.visualization.DataTable(jsonData);
+         var ECGoptions = {
+         title:'Latest ECG Reads',
+         legend:{position:'bottom'},
+         chartArea:{width:'80%'},
+          explorer: { axis: 'horizontal',maxZoomIn: 0.5, maxZoomOut: 8,
+          actions: ['dragToZoom', 'rightClickToReset'],zoomDelta:1.5  },
+          hAxis: {
+            title:"Time",
+            showTextEvery:60,
+            gridlines: {count: 12},title:"Time"
+          },
+          vAxis: {
+            minValue: 0,
+            gridlines: {count: 12},title:"ECG"
+          }
+         };        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.LineChart(document.getElementById('ecg'));
+        chart.draw(data,ECGoptions);
+      }
+      google.charts.setOnLoadCallback(lineemg);
+      function lineemg(d) {
+        var jsonData = $.ajax({
+            url: "script/_getemg.php",
+            dataType: "json",
+            data:{dev:d},
+            async: false,
+            success:function(res){console.log(res);},
+            error:function(res){console.log(res);}
+            }).responseText;
+        // Create our data table out of JSON data loaded from server.
+        var data = new google.visualization.DataTable(jsonData);
+         var EMGoptions = {
+         title:'Latest EMG Reads',
+         legend:{position:'bottom'},
+         chartArea:{width:'80%'},
+          hAxis: {
+            title:"Time",
+            showTextEvery:60
+          },
+          vAxis: {
+            minValue: 0,
+            gridlines: {count: 10},title:"EMG"
+          }
+         };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.LineChart(document.getElementById('emg'));
+        chart.draw(data,EMGoptions);
+      }
+      function getDevices(){
+        $.ajax({
+          url:"script/_getDevices.php",
+          type:"POST",
+          success:function(res){
+           console.log(res);
+           $.each(res.data,function(){
+             $("#devices").append(
+             '<option value="'+this.id+'">'+this.name+'</option>'
+             );
+           });
+           if($("#userperiv").val() == 2){
+             $("#devices").val($("#d_id").val());
+             $("#devices").addClass('disabled');
+             $("#devices").attr('disabled','disabled');
+             setstatuses($("#devices").val(),$("#machine").val());
+             changeReads($("#devices").val(),$("#machine").val());
+             lineecg($("#devices").val(),$("#machine").val());
+             lineemg($("#devices").val(),$("#machine").val());
+           }
+          },
+          error:function(e){
+           console.log(e);
+          }
+        });
+      }
+      getDevices();
+      $("#devices").change(function(){
+        changeReads($("#devices").val());
+        lineemg($("#devices").val());
+        lineemg($("#devices").val());
+       });
+      setInterval(function() {
+        //randomreads();
+        changeReads($("#devices").val());
+        lineecg($("#devices").val());
+        lineemg($("#devices").val());
+        if($('input#active').is(':checked')){
+         randomreads();
+        }
+
+      }, 1000);
+      function randomreads(){ ///------testing function adds random reads
+        $.ajax({
+          url:"script/randomreads.php",
+          success:function(res){
+           console.log(res);
+          },
+          error:function(e){
+           console.log(e);
+          }
+        });
+      }
+   </script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
       <script>
       // Check that service workers are supported
@@ -300,63 +492,6 @@ canvas {
         });
       }
       </script>
-  <script type="text/javascript">
-
-            var canvas = document.getElementById("ecg");
-            var ctx = canvas.getContext("2d");
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fill();
-
-            var n = 1;
-            var data = [
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 123, 82, 82, 82,
-                148, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                148, 43, 149, 150, 150, 150, 143, 311, 82, 123, 82, 82, 82, 82,
-                144, 149, 149, 150, 150, 34, 12, 21, 82, 82, 82, 82, 82, 82,
-                142, 149, 149, 534, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                148, 149, 149, 150, 150, 123, 143, 82, 82, 82, 82, 82, 82, 82,
-                13, 149, 212, 231, 150, 150, 143, 82, 82, 234, 432, 82, 82, 82,
-                675, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                65, 149, 149, 150, 150, 150, 143, 82, 82, 82, 82, 82, 82, 82,
-                45, 149, 149, 150, 150, 150, 143, 82, 82, 111, 32, 65, 82, 82,
-                45, 149, 149, 150, 150, 150, 143, 82, 82, 111, 32, 65, 82, 82,
-                45, 149, 149, 150, 150, 150, 143, 82, 82, 111, 32, 65, 82, 82,
-                45, 149, 149, 150, 150, 150, 143, 82, 82, 111, 32, 65, 82, 82,
-                45, 149, 149, 150, 150, 150, 143, 82, 82, 111, 32, 65, 82, 82,
-                45, 149, 149, 150, 150, 150, 143, 82, 82, 111, 32, 65, 82, 82,
-                45, 149, 149, 150, 150, 150, 143, 82, 82, 111, 32, 65, 82, 82,
-                45, 149, 149, 150, 150, 150, 143, 82, 82, 111, 32, 65, 82, 82,
-                45, 149, 149, 150, 150, 150, 143, 82, 82, 111, 32, 65, 82, 82,
-                45, 149, 149, 150, 150, 150, 143, 82, 82, 111, 32, 65, 82, 82,
-                45, 149, 149, 112, 150, 133, 100, 82, 82, 111, 32, 65, 82, 82,
-                45, 149, 149, 111, 155, 150, 100, 82, 182, 111, 32, 65, 82, 82,
-                45, 149, 149, 111, 155, 150, 100, 82, 182, 111, 32, 65, 82, 82,
-                 ];
-
-
-            drawWave();
-
-            function drawWave() {
-                setTimeout(function() {
-                    requestAnimationFrame(drawWave);
-                    ctx.lineWidth = "1";
-                    ctx.strokeStyle = '#FFFFFF';
-
-                    // Drawing code goes here
-                n += 1;
-                if (n >= data.length) {
-                    n = 1;
-                }
-                ctx.beginPath();
-                ctx.moveTo(n - 1, data[n - 1]);
-                ctx.lineTo(n, data[n]);
-                ctx.stroke();
-
-                ctx.clearRect(n+1, 0, 10, canvas.height);
-
-                }, 100 );
-            }
-    </script>
 </body>
 
 </html>
