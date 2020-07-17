@@ -13,7 +13,7 @@
   }
 
   .dev {
-    background-color: #006666;
+    background-color: #1E90FF;
     padding: 10px;
 
   }
@@ -238,7 +238,7 @@ canvas {
      <ul class="adminlist">
         <li><a href="addpatient.php">Add new Patient</a></li>
         <li><a href="adddoctor.php">Add new Doctor</a></li>
-        <li><a href="add.php">Assign Patient and devices</a></li>
+        <li><a href="adddevice.php">Add Device</a></li>
      </ul>
    </div>
    <?php
@@ -249,16 +249,16 @@ canvas {
   <div class="col-md-9">
     <div class="row">
         <div class="col-sm-2">
-            <label class="h3">Room No : 123</label>
+            <label class="h4">Room No : 123</label>
         </div>
         <div class="col-sm-3">
-            <label class="h3"><b>Ahmed Ali Kadhim</b></label>
+            <label class="h4"><b>Ahmed Ali Kadhim</b></label>
         </div>
         <div class="col-sm-3">
-            <label class="h3">Age: 34</label>
+            <label class="h4">Age: 34</label>
         </div>
         <div class="col-sm-4">
-            <label class="h3">Patient ID: AAK12987655789G</label>
+            <label class="h4">Patient ID: AAK12987655789G</label>
         </div>
         <div class="col-sm-12"><hr /></div>
     </div>

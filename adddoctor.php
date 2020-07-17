@@ -12,7 +12,7 @@
   }
 
   .dev {
-    background-color: #006666;
+    background-color:#1E90FF;
     padding: 10px;
 
   }
@@ -222,7 +222,7 @@ canvas {
    <div class="col-md-12 dev">
      <div class="form-group">
        <label class="col-sm-4"> Patient </label>
-       <select class="col-sm-8 input-md btn form-control selectpicker" data-live-search="true" id="devices">
+       <select class="form-control selectpicker" data-live-search="true" id="devices">
           <option>-- select Patient --</option>
        </select>
      </div>
@@ -236,8 +236,8 @@ canvas {
    <div class="col-md-12 dev">
      <ul class="adminlist">
         <li><a href="addpatient.php">Add new Patient</a></li>
-        <li><a href="add.php">Add new Doctor</a></li>
-        <li><a href="add.php">Assign Patient and devices</a></li>
+        <li><a href="adddoctor.php">Add new Doctor</a></li>
+        <li><a href="adddevice.php">Add Device</a></li>
      </ul>
    </div>
    <?php

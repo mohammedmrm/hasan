@@ -15,7 +15,9 @@ $error = [];
 $name    = $_REQUEST['name'];
 $phone   = $_REQUEST['phone'];
 $birthdate= $_REQUEST['birthdate'];
-$device_id = 1;
+$age= $_REQUEST['age'];
+$id_card= $_REQUEST['id'];
+$device_id = $_REQUEST['device']; ;
 
 
 
@@ -36,19 +38,23 @@ $v->addRuleMessages([
 
 $v->validate([
     'name'    => [$name,    'required|min(4)|max(50)'],
-    'phone'   => [$phone,   "required|isPhoneNumber"]
+    'phone'   => [$phone,   "required|isPhoneNumber"],
+    'age'   => [$age,   "required|int"],
+    'id'   => [$id_card ,   "required|min(2)|max(250)"],
 ]);
 
 if($v->passes()) {
-  $sql = 'insert into patient (name,birthdate,phone,device_id) values (?,?,?,?)';
-  $result = setData($con,$sql,[$name,$birthdate,$phone,$device_id]);
+  $sql = 'insert into patient (name,birthdate,phone,device_id,id_card,age) values (?,?,?,?)';
+  $result = setData($con,$sql,[$name,$birthdate,$phone,$device_id,$id_card,$age]);
   if($result > 0){
     $success = 1;
   }
 }else{
   $error = [
            'name_err'=> implode($v->errors()->get('name')),
-           'phone_err'=>implode($v->errors()->get('phone'))
+           'phone_err'=>implode($v->errors()->get('phone')),
+           'age_err'=>implode($v->errors()->get('age')),
+           'id_err'=>implode($v->errors()->get('id')) ,
            ];
 }
 echo json_encode(['success'=>$success, 'error'=>$error]);

@@ -12,7 +12,7 @@
   }
 
   .dev {
-    background-color: #006666;
+    background-color: #1E90FF;
     padding: 10px;
 
   }
@@ -222,7 +222,7 @@ canvas {
    <div class="col-md-12 dev">
      <div class="form-group">
        <label class="col-sm-4"> Patient </label>
-       <select class="col-sm-8 input-md btn form-control selectpicker" data-live-search="true" id="devices">
+       <select class=" form-control selectpicker" data-live-search="true" id="devices">
           <option>-- select Patient --</option>
        </select>
      </div>
@@ -236,8 +236,8 @@ canvas {
    <div class="col-md-12 dev">
      <ul class="adminlist">
         <li><a href="addpatient.php">Add new Patient</a></li>
-        <li><a href="add.php">Add new Doctor</a></li>
-        <li><a href="add.php">Assign Patient and devices</a></li>
+        <li><a href="adddoctor.php">Add new Doctor</a></li>
+        <li><a href="adddevice.php">Add Device</a></li>
      </ul>
    </div>
    <?php
@@ -258,7 +258,9 @@ canvas {
     	            </div>
 	            </div>
                 <div class="row">
-					<form class="form-horizontal" method="post" id="installfrom">
+					<form class="form-horizontal col-12" method="post" id="installfrom">
+                        <div class="row">
+                        <div class="col-6">
                         <div class="form-group">
 							<label for="name" class="control-label">Name</label>
 							<div class="cols-sm-10">
@@ -279,7 +281,28 @@ canvas {
 							</div>
 						    <label for="name" class="control-label text-danger" id="phone_err"></label>
 						</div>
-
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label">Age</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-text input-group-addon">Age</span>
+									<input type="text" class="form-control" name="age" id="age"  placeholder="Age"/>
+								</div>
+							</div>
+						    <label for="name" class="control-label text-danger" id="phone_err"></label>
+						</div>
+				</div>
+				<div class="col-6">
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label">ID</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-text input-group-addon">ID</span>
+									<input type="text" class="form-control" name="id" id="id"  placeholder=""/>
+								</div>
+							</div>
+						    <label for="name" class="control-label text-danger" id="phone_err"></label>
+						</div>
 						<div class="form-group">
 							<label for="birthdate" class="cols-sm-2 control-label">Birthdate</label>
 							<div class="cols-sm-10">
@@ -296,12 +319,14 @@ canvas {
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-text input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                    <select class="form-control" name="device_id" id="devices">
+                                    <select class="form-control" name="device_id" id="device">
                                      <option>--- select --- </option>
                                     </select>
                                 </div>
 							</div>
 						    <label for="name" class="control-label text-danger" id="confirm_err"></label>
+						</div>
+						</div>
 						</div>
 						<div class="form-group ">
 							<button onclick="addpatient()" type="button" class="btn btn-primary btn-lg btn-block login-button">Add</button>
@@ -312,13 +337,13 @@ canvas {
 		</div>
   </div>
   </div>
-</div>
 <?php include("footer.php"); ?>
  <!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
-     <script type="text/javascript">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+<script src="js/getDevices.js"></script>
+<script type="text/javascript">
 
-
+getDevices($("#device"));
 function addpatient(){
     var myform = document.getElementById('installfrom');
     var fd = new FormData(myform);
@@ -354,24 +379,7 @@ function addpatient(){
   });
 }
 
-function getDevices(){
-        $.ajax({
-          url:"script/_getDevices.php",
-          type:"POST",
-          success:function(res){
-           console.log(res);
-           $.each(res.data,function(){
-             $("#devices").append(
-             '<option value="'+this.d_id+'">'+this.name+'</option>'
-             );
-           });
-          },
-          error:function(e){
-           console.log(e);
-          }
-        });
-      }
-      getDevices();
+
     </script>
 </body>
 

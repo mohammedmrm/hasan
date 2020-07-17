@@ -19,7 +19,7 @@ if(!isset($_SESSION)){
   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
   <style type="text/css">
     .header {
-      background-color: #669900;
+      background-color: #1E90FF;
       height: 100px;
     }
     body {
@@ -63,7 +63,7 @@ if(!isset($_SESSION)){
     }
     .list {
       height: 25px;
-      background-color: #669900;
+      background-color: #1E90FF;
       margin-bottom:5px;
       border-top: 1px #ccc solid;
       margin-top:2px;

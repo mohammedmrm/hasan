@@ -6,7 +6,7 @@
 <head>
   <style type="text/css">
     .footer {
-      background-color:#669900;
+      background-color:#1E90FF;
       height: 80px;
     }
     .copyrights p{

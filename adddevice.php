@@ -1,4 +1,4 @@
-<?php include("adminLoginCheck.php");?> 
+<?php include("loginCheck.php");?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -13,7 +13,7 @@
  <div class="row">
   <div class="col-md-12 body">
     <div class="row">
-      <form class="form-horizontal" id="adddevice">
+      <form class="col-12" id="adddevice">
       <fieldset>
 
       <!-- Form Name -->
@@ -36,17 +36,6 @@
         </div>
         <label class="control-label text-danger" id="passerr" ></label>
       </div>
-
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="email"></label>
-        <div class="col-md-4">
-        <input id="email" name="email" type="text" placeholder="e-mail" class="form-control input-md">
-
-        </div>
-        <label class="control-label text-danger" id="emailerr" ></label>
-      </div>
-
       <!-- Text input-->
       <div class="form-group">
         <label class="col-md-4 control-label" for="devicename">Device Name</label>
@@ -55,19 +44,6 @@
         </div>
          <label class="control-label text-danger" id="devicenameerr" ></label>
       </div>
-
-      <!-- Select Basic -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="periv">Select Basic</label>
-        <div class="col-md-4">
-          <select id="periv" name="periv" class="form-control">
-            <option value="1">Admin</option>
-            <option value="2">Celint</option>
-          </select>
-        </div>
-        <label class="control-label text-danger" id="periverr" ></label>
-      </div>
-
       <!-- Button -->
       <div class="form-group">
         <label class="col-md-4 control-label" for="add">Add</label>
