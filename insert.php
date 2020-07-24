@@ -60,7 +60,7 @@ if($msg == 1){
       }
       $newdata = json_encode($merg);
       if(fwrite($fh,$newdata)){
-        $sql = "delete from measurement where TIMESTAMPDIFF(HOUR,datetime,?) >= 24";
+        $sql = "delete from records where TIMESTAMPDIFF(HOUR,datetime,?) >= 24";
         $result = setData($con,$sql,[$cerrntdatetime]);
       }
    }
