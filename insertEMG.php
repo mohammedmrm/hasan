@@ -1,12 +1,8 @@
-﻿<?php
+<?php
 header('Content-type:application/json;charset=windows-1256');
 require_once("script/dbconnection.php");
 error_reporting(0);
-$temp = $_REQUEST['temp']; //Temperature
-$ox   = $_REQUEST['ox']; //oxygen
-$beat = $_REQUEST['beat']; //heart Beat
-$emg  = $_REQUEST['emg']; //EMG
-$ecg  = $_REQUEST['ecg']; //ECG
+$emg  = $_REQUEST['emg']; //ECG
 
 
 $username = $_REQUEST['u']; //usersname
@@ -36,19 +32,22 @@ if(empty($username) || empty($password)){
 }
 //if login ok continue
 if($msg == 1){
-   $sql = "insert into records (patient_id,dev_id,oxygen,temp,beat) values(?,?,?,?,?)";
-   $result = setData($con,$sql,[$patient,$dev,$ox,$temp,$beat]);
+  foreach ($emg as $em){
+   $sql = "insert into emg (patient_id,dev_id,emg) values(?,?,?)";
+   $result = setData($con,$sql,[$patient,$dev,$em]);
    if($result == 1){
     $msg = "data recorded";
    }
+  }
+
    //------------------------------------------------
    //moving old recorded data to a file
    date_default_timezone_set('Asia/Baghdad');
    $cerrntdatetime = date('Y-m-d H:i:s');
-   $sql = "select * from records where TIMESTAMPDIFF(HOUR,datetime,?) >= 24";
+   $sql = "select * from emg where TIMESTAMPDIFF(HOUR,date,?) >= 24";
    $result = getData($con,$sql,[$cerrntdatetime]);
    //print_r($result);
-   $file ="oldrecord/".date('Y-m-d').'.txt';
+   $file ="oldrecord/".date('Y-m-d').'-EMG.txt';
    $fh = fopen($file, 'a');
    if($fh && count($result) > 0 ){
       $content = file_get_contents($file);
@@ -60,7 +59,7 @@ if($msg == 1){
       }
       $newdata = json_encode($merg);
       if(fwrite($fh,$newdata)){
-        $sql = "delete from records where TIMESTAMPDIFF(HOUR,datetime,?) >= 24";
+        $sql = "delete from emg where TIMESTAMPDIFF(HOUR,date,?) >= 24";
         $result = setData($con,$sql,[$cerrntdatetime]);
       }
    }

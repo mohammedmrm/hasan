@@ -351,7 +351,7 @@ canvas {
           url:"script/_getCurrentReads.php",
           data:{dev:d},
           success:function(res){
-             
+           console.log(res);
            $.each(res.data,function(){
             gaugeData.setValue(0, 0, this.temp);
             gauge.draw(gaugeData, gaugeOptions);
@@ -370,12 +370,12 @@ canvas {
 
       function lineecg(d) {
         var jsonData = $.ajax({
-            url: "script/_getemg.php",
+            url: "script/_getecg.php",
             dataType: "json",
             data:{dev:d},
             async: false,
-            success:function(res){ },
-            error:function(res){ }
+            success:function(res){console.log(res);},
+            error:function(res){console.log(res);}
             }).responseText;
 
         // Create our data table out of JSON data loaded from server.
@@ -431,23 +431,23 @@ canvas {
       }
       function getDevices(){
         $.ajax({
-          url:"script/_getDevices.php",
+          url:"script/_getDevicesPatient.php",
           type:"POST",
           success:function(res){
             
            $.each(res.data,function(){
              $("#devices").append(
-             '<option value="'+this.id+'">'+this.name+'</option>'
+             '<option value="'+this.id+'">'+this.patient_name+'</option>'
              );
            });
            if($("#userperiv").val() == 2){
              $("#devices").val($("#d_id").val());
              $("#devices").addClass('disabled');
              $("#devices").attr('disabled','disabled');
-             setstatuses($("#devices").val(),$("#machine").val());
-             changeReads($("#devices").val(),$("#machine").val());
-             lineecg($("#devices").val(),$("#machine").val());
-             lineemg($("#devices").val(),$("#machine").val());
+             setstatuses($("#devices").val());
+             changeReads($("#devices").val());
+             lineecg($("#devices").val());
+             lineemg($("#devices").val());
            }
           },
           error:function(e){
