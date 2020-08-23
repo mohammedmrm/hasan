@@ -272,7 +272,16 @@ canvas {
            <div id="beat"></div>
         </div>
     </div>
-        <hr />
+    <hr />
+    <div class="row">
+        <div class="col-sm-6">
+          <h3>Blood Prasure: 113/78</h3>
+        </div>
+        <div class="col-sm-6">
+           <h3>Glucose: 130</h3>
+        </div>
+    </div>
+    <hr />
     <div class="row">
         <div class="col-sm-6"><h1>ECG</h1>
             <div id="ecg"></div>
