@@ -92,9 +92,9 @@ if(!isset($_SESSION)){
   <div class="col-sm-12 header">
       <div class="col-sm-12">
         <div class="row">
-          <div class="col-sm-2 logo" style="text-align: left"></div>
-          <div class="col-sm-6" style="text-align: center;color: #FFFFFF"><h3>University of Babylon <br /> College of Engineering</h3></div>
-          <div class="col-sm-2 unilogo"></div>
+          <div class="col-sm-2 unilogo" style="text-align: left"></div>
+          <div class="col-sm-6" style="text-align: center;color: #FFFFFF"></div>
+          <div class="col-sm-2 "></div>
           <div class="col-sm-2 logout">
           <?php if(!isset($_SESSION['login'])){
           echo '<a href="login.php">Sign In</a>';
