@@ -52,7 +52,7 @@ if(!isset($_SESSION)){
     .unilogo {
       color: #FFFFFF;
       height: 100px;
-      background-image: url(img/unilogo.png);
+      background-image: url(img/unilogo2.png);
       background-position: right;
       background-repeat: no-repeat;
       background-size: contain;
@@ -92,9 +92,8 @@ if(!isset($_SESSION)){
   <div class="col-sm-12 header">
       <div class="col-sm-12">
         <div class="row">
-          <div class="col-sm-2 unilogo" style="text-align: left"></div>
-          <div class="col-sm-6" style="text-align: center;color: #FFFFFF"></div>
-          <div class="col-sm-2 "></div>
+          <div class="col-sm-6 unilogo"  style="text-align: center;color: #FFFFFF"></div>
+          <div class="col-sm-4 "></div>
           <div class="col-sm-2 logout">
           <?php if(!isset($_SESSION['login'])){
           echo '<a href="login.php">Sign In</a>';
