@@ -251,13 +251,13 @@ canvas {
             <label class="h4">Room No : 123</label>
         </div>
         <div class="col-sm-3">
-            <label class="h4"><b>Ahmed Ali Kadhim</b></label>
+            <label class="h4" id="Name"><b>Ahmed Ali Kadhim</b></label>
         </div>
         <div class="col-sm-3">
-            <label class="h4">Age: 34</label>
+            <label class="h4" id="age">Age: 34</label>
         </div>
         <div class="col-sm-4">
-            <label class="h4">Patient ID: AAK12987655789G</label>
+            <label class="h4" id="id">Patient ID: AAK12987655789G</label>
         </div>
         <div class="col-sm-12"><hr /></div>
     </div>
@@ -296,11 +296,11 @@ canvas {
       google.charts.setOnLoadCallback(beat);
 
       var gaugeOptions = {
-           height: 200,
-          redFrom: 70, redTo: 120,
-          yellowFrom:40, yellowTo: 70,
-          greenFrom:30,greenTo:40,
-          minorTicks: 5 , max :120
+           height: 250,yellowColor:'#FF3333',redColor:"#FF3333",
+          redFrom: 38, redTo: 50,
+          yellowFrom:0, yellowTo: 34,
+          greenFrom:34,greenTo:38,
+          minorTicks: 10 , max :50,min:20
         };
       function temperature() {
       gaugeData = new google.visualization.DataTable();
@@ -313,10 +313,10 @@ canvas {
 
       }
       var gaugeOptions2 = {
-          height: 200,
-          redFrom: 70, redTo: 100,
-          yellowFrom:40, yellowTo: 70,
-          greenFrom:30,greenTo:40,
+          height: 250,redColor:"#FF3333",
+          redFrom: 0, redTo: 88,
+          yellowFrom:88, yellowTo: 96,
+          greenFrom:96,greenTo:100,
           minorTicks: 5 , max :100
         };
       function oxygen() {
@@ -330,11 +330,11 @@ canvas {
 
       }
       var gaugeOptions3 = {
-          height: 200,
-          redFrom: 70, redTo: 100,
-          yellowFrom:40, yellowTo: 70,
-          greenFrom:30,greenTo:40,
-          minorTicks: 5 , max :100
+          height: 250,yellowColor:'#FF3333',redColor:"#FF3333",
+          redFrom: 90, redTo: 200,
+          yellowFrom:0, yellowTo: 50,
+          greenFrom:50,greenTo:90,
+          minorTicks: 20 , max :200
         };
       function beat() {
       gaugeData3 = new google.visualization.DataTable();
@@ -347,6 +347,7 @@ canvas {
 
       }
       function changeReads(d) {
+        getPatientInfo();
         $.ajax({
           url:"script/_getCurrentReads.php",
           data:{dev:d},
@@ -481,6 +482,11 @@ canvas {
            console.log(e);
           }
         });
+      }
+      function getPatientInfo(){
+        $.ajax({
+
+        })
       }
    </script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
