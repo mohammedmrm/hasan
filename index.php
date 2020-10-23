@@ -248,16 +248,19 @@ canvas {
   <div class="col-md-9">
     <div class="row">
         <div class="col-sm-2">
-            <label class="h4">Room No : 123</label>
+            <label class="h5">Room No : 123</label>
         </div>
         <div class="col-sm-3">
-            <label class="h4" id="Name"><b>Ahmed Ali Kadhim</b></label>
+            <label class="h5" id="Name"><b>Ahmed Ali Kadhim</b></label>
+        </div>
+        <div class="col-sm-2">
+            <label class="h5" id="age">Age: 34</label>
+        </div>
+        <div class="col-sm-2">
+            <label class="h5" id="gender">Gender: Male</label>
         </div>
         <div class="col-sm-3">
-            <label class="h4" id="age">Age: 34</label>
-        </div>
-        <div class="col-sm-4">
-            <label class="h4" id="id">Patient ID: AAK12987655789G</label>
+            <label class="h5" id="id">Patient ID: AAK12987655789G</label>
         </div>
         <div class="col-sm-12"><hr /></div>
     </div>
@@ -272,7 +275,7 @@ canvas {
            <div id="beat"></div>
         </div>
     </div>
-    <hr />
+<!--    <hr />
     <div class="row">
         <div class="col-sm-6">
           <h3>Blood Prasure: 113/78</h3>
@@ -280,7 +283,7 @@ canvas {
         <div class="col-sm-6">
            <h3>Glucose: 130</h3>
         </div>
-    </div>
+    </div>-->
     <hr />
     <div class="row">
         <div class="col-sm-6"><h1>ECG</h1>
