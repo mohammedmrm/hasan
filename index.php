@@ -221,7 +221,7 @@ canvas {
    <div class="col-md-12 dev">
      <div class="form-group">
        <label class="col-sm-4"> Patient </label>
-       <select class="form-control selectpicker" onchange="changeReads($(this).val())" data-live-search="true" id="devices">
+       <select class="form-control selectpicker" onchange="changeReads($(this).val());getPatientInfo();" data-live-search="true" id="devices">
           <option>-- select Patient --</option>
        </select>
        <input type="checkbox" id="active" value="Active Random Reads"/> Active Random Reads
@@ -248,10 +248,10 @@ canvas {
   <div class="col-md-9">
     <div class="row">
         <div class="col-sm-2">
-            <label class="h5">Room No : 123</label>
+            <label class="h5" id="room">Room No : 123</label>
         </div>
         <div class="col-sm-3">
-            <label class="h5" id="Name"><b>Ahmed Ali Kadhim</b></label>
+            <label class="h5" id="name"><b>Ahmed Ali Kadhim</b></label>
         </div>
         <div class="col-sm-2">
             <label class="h5" id="age">Age: 34</label>
@@ -387,8 +387,8 @@ canvas {
             dataType: "json",
             data:{dev:d},
             async: false,
-            success:function(res){console.log(res);},
-            error:function(res){console.log(res);}
+            success:function(res){},
+            error:function(res){}
             }).responseText;
 
         // Create our data table out of JSON data loaded from server.
@@ -488,7 +488,7 @@ canvas {
         $.ajax({
           url:"script/randomreads.php",
           success:function(res){
-            
+
           },
           error:function(e){
            console.log(e);
@@ -497,7 +497,26 @@ canvas {
       }
       function getPatientInfo(){
         $.ajax({
-
+          url:"script/_getPatientInfo.php",
+          data:{id:$("#devices").val()},
+          success:function(res){
+            console.log(res);
+            $.each(res.data,function(){
+               if(this.gender == 1){
+                   gender = "Male";
+               }else{
+                  gender = "Female";
+               }
+               $("#room").text('Room: '+this.id);
+               $("#name").text('Name: '+this.name);
+               $("#age").text('Age: '+this.age);
+               $("#id").text('ID: '+this.id_card);
+               $("#gender").text('Gender: '+gender);
+            });
+          },
+          error:function(e){
+           console.log(e);
+          }
         })
       }
    </script>
