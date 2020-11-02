@@ -25,7 +25,7 @@
           <div class="text-center copyrights" style="margin-top:25px;">
               <p>Eng. Hasan &copy; 2019, All Rights Reserved &reg;
                   <br>
-                  <span>Designed and Developed By: <b>_____</b></span>
+                  <span>Designed and Developed By: <b>Hasan</b></span>
               </p>
           </div>
         </div>
