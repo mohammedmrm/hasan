@@ -395,17 +395,18 @@ canvas {
         var data = new google.visualization.DataTable(jsonData);
          var ECGoptions = {
          title:'Latest ECG Reads',
+         lineWidth:1,
          legend:{position:'bottom'},
          chartArea:{width:'80%'},
           explorer: { axis: 'horizontal',maxZoomIn: 0.5, maxZoomOut: 8,
           actions: ['dragToZoom', 'rightClickToReset'],zoomDelta:1.5  },
           hAxis: {
             title:"Time",
-            showTextEvery:60,
             gridlines: {count: 12},title:"Time"
           },
           vAxis: {
             minValue: 0,
+            gridlines: {count: 12},title:"Time",
             gridlines: {count: 12},title:"ECG"
           }
          };        // Instantiate and draw our chart, passing in some options.
@@ -426,11 +427,11 @@ canvas {
         var data = new google.visualization.DataTable(jsonData);
          var EMGoptions = {
          title:'Latest EMG Reads',
+         lineWidth:1,
          legend:{position:'bottom'},
          chartArea:{width:'80%'},
           hAxis: {
             title:"Time",
-            showTextEvery:60
           },
           vAxis: {
             minValue: 0,
