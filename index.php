@@ -398,7 +398,7 @@ canvas {
          lineWidth:1,
          legend:{position:'bottom'},
          chartArea:{width:'80%'},
-          explorer: { axis: 'horizontal',maxZoomIn: 0.5, maxZoomOut: 8,
+          explorer: { axis: 'horizontal',maxZoomIn: 1, maxZoomOut: 8,
           actions: ['dragToZoom', 'rightClickToReset'],zoomDelta:1.5  },
           hAxis: {
             title:"Time",

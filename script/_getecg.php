@@ -3,7 +3,7 @@ header('Content-type:application/json');
 session_start();
 require_once("dbconnection.php");
 $device = $_REQUEST["dev"];
-$sql = "select * from (select * from  ecg where dev_id=? order by date DESC limit 100) sub  order by id ASC";
+$sql = "select * from (select * from  ecg where dev_id=? order by date DESC limit 150) sub  order by id ASC";
 $result = getData($con,$sql,[$device]);
 
 $data = [];
@@ -22,7 +22,7 @@ $table['cols'] = [
  ]
 
 ];
-$sql = "select * from (select avg(ecg) as avg from ecg where dev_id=? order by id DESC limit 100) sub";
+$sql = "select * from (select avg(ecg) as avg from ecg where dev_id=? order by id DESC limit 150) sub";
 $avgres = getData($con,$sql,[$device]);
 $avg = $avgres[0]['avg'];
 foreach($result as $k=>$val){
