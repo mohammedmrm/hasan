@@ -364,7 +364,7 @@ canvas {
           url:"script/_getCurrentReads.php",
           data:{dev:d},
           success:function(res){
-           console.log(res);
+           //console.log(res);
            $.each(res.data,function(){
             gaugeData.setValue(0, 0, this.temp);
             gauge.draw(gaugeData, gaugeOptions);
@@ -501,7 +501,7 @@ canvas {
           url:"script/_getPatientInfo.php",
           data:{id:$("#devices").val()},
           success:function(res){
-            console.log(res);
+            //console.log(res);
             $.each(res.data,function(){
                if(this.gender == 1){
                    gender = "Male";
