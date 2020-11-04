@@ -22,7 +22,7 @@ $table['cols'] = [
  ]
 
 ];
-$sql = "select avg(ecg) as avg from ecg where dev_id=? order by date limit 500";
+$sql = "select avg(ecg) as avg from ecg where dev_id=? order by date limit 250";
 $avgres = getData($con,$sql,[$device]);
 $avg = $avgres[0]['avg'];
 foreach($result as $k=>$val){
