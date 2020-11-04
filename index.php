@@ -405,8 +405,6 @@ canvas {
             gridlines: {count: 12},title:"Time"
           },
           vAxis: {
-            minValue: 0,
-            gridlines: {count: 12},title:"Time",
             gridlines: {count: 12},title:"ECG"
           }
          };        // Instantiate and draw our chart, passing in some options.
