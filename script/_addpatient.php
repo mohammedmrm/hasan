@@ -17,7 +17,7 @@ $phone   = $_REQUEST['phone'];
 $birthdate= $_REQUEST['birthdate'];
 $age= $_REQUEST['age'];
 $id_card= $_REQUEST['id'];
-$device_id = $_REQUEST['device']; ;
+$device_id = $_REQUEST['device_id']; ;
 
 
 
@@ -44,8 +44,8 @@ $v->validate([
 ]);
 
 if($v->passes()) {
-  $sql = 'insert into patient (name,birthdate,phone,device_id,id_card,age) values (?,?,?,?)';
-  $result = setData($con,$sql,[$name,$birthdate,$phone,$device_id,$id_card,$age]);
+  $sql = 'insert into patient (name,birthdate,phone,device_id,id_card,age,dev_id) values (?,?,?,?,?,?,?)';
+  $result = setData($con,$sql,[$name,$birthdate,$phone,$device_id,$id_card,$age,$device_id]);
   if($result > 0){
     $success = 1;
   }
@@ -57,5 +57,5 @@ if($v->passes()) {
            'id_err'=>implode($v->errors()->get('id')) ,
            ];
 }
-echo json_encode(['success'=>$success, 'error'=>$error]);
+echo json_encode([$_REQUEST,'success'=>$success, 'error'=>$error]);
 ?>

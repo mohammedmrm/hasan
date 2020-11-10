@@ -17,25 +17,7 @@
       <fieldset>
 
       <!-- Form Name -->
-      <legend>Add New User's Device</legend>
-
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="username">Username</label>
-        <div class="col-md-4">
-            <input id="username" name="username" type="text" placeholder="Username" class="form-control input-md" required="">
-        </div>
-        <label class="control-label text-danger" id="usererr" ></label>
-      </div>
-
-      <!-- Password input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="password">Password</label>
-        <div class="col-md-4">
-          <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md">
-        </div>
-        <label class="control-label text-danger" id="passerr" ></label>
-      </div>
+      <legend>Add New Device</legend>
       <!-- Text input-->
       <div class="form-group">
         <label class="col-md-4 control-label" for="devicename">Device Name</label>
@@ -84,7 +66,7 @@ function adddevice(){
        $("#passerr").text("");
        $("#devicenameerr").text("");
        $("#periverr").text("");
-       alert("New user and device added");
+       alert("New device added");
      }
 
      },
