@@ -13,9 +13,9 @@ if(!isset($_SESSION)){
   <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" />
   <script  src="bootstrap-4.3.1-dist/js/jquery-3.2.1.min.js"></script>
   <script  src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-  <script  src="../alnahr-dash/js/toast.js"></script>
+  <script  src="js/toast.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
-  <link href="../alnahr-dash/bootstrap-4.3.1-dist/css/toast.css" rel="stylesheet">
+  <link href="bootstrap-4.3.1-dist/css/toast.css" rel="stylesheet">
   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
