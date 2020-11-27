@@ -248,19 +248,19 @@ canvas {
   <div class="col-md-9">
     <div class="row">
         <div class="col-sm-2">
-            <label class="h5" id="room">Room No : 123</label>
+            <label class="h5" id="room">Room No : </label>
         </div>
         <div class="col-sm-3">
-            <label class="h5" id="name"><b>Ahmed Ali Kadhim</b></label>
+            <label class="h5" id="name"><b></b></label>
         </div>
         <div class="col-sm-2">
-            <label class="h5" id="age">Age: 34</label>
+            <label class="h5" id="age">Age: ]</label>
         </div>
         <div class="col-sm-2">
-            <label class="h5" id="gender">Gender: Male</label>
+            <label class="h5" id="gender">Gender: </label>
         </div>
         <div class="col-sm-3">
-            <label class="h5" id="id">Patient ID: AAK12987655789G</label>
+            <label class="h5" id="id">Patient ID: </label>
         </div>
         <div class="col-sm-12"><hr /></div>
     </div>
