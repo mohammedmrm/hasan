@@ -207,7 +207,14 @@ canvas {
   font-size: 0;
   background:transparent;
 }
-
+.led {
+  width: 20px;
+  height:20px;
+  border-radius: 10px;
+  position: relative;
+  margin: auto;
+  background-color: #4F6366;
+}
 
   </style>
   </head>
@@ -242,7 +249,13 @@ canvas {
    </div>
    <?php
       echo "<input type='hidden' id='' value='1'/>";
-   }?>
+   }
+   ?> <br />
+     <div class="col-md-12 dev">
+     <?php
+     echo "<h3 style='color:#fff;'><b>".date("Y-d-m h:i")."</b></h3>";
+     ?>
+    </div>
   </div>
   </div>
   <div class="col-md-9">
@@ -254,7 +267,7 @@ canvas {
             <label class="h5" id="name"><b></b></label>
         </div>
         <div class="col-sm-2">
-            <label class="h5" id="age">Age: ]</label>
+            <label class="h5" id="age">Age: </label>
         </div>
         <div class="col-sm-2">
             <label class="h5" id="gender">Gender: </label>
@@ -273,6 +286,17 @@ canvas {
         </div>
         <div class="col-sm-4"><h3>Heart Beat</h3>
            <div id="beat"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+          <div class="led" id="oxled"> </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="led" id="templed"></div>
+        </div>
+        <div class="col-sm-4">
+          <div class="led" id="beatled"></div>
         </div>
     </div>
 <!--    <hr />
@@ -309,9 +333,9 @@ canvas {
 
       var gaugeOptions = {
            height: 250,yellowColor:'#FF3333',redColor:"#FF3333",
-          redFrom: 38, redTo: 50,
+          redFrom: 37, redTo: 50,
           yellowFrom:0, yellowTo: 34,
-          greenFrom:34,greenTo:38,
+          greenFrom:34,greenTo:37,
           minorTicks: 10 , max :50,min:20
         };
       function temperature() {
@@ -343,9 +367,9 @@ canvas {
       }
       var gaugeOptions3 = {
           height: 250,yellowColor:'#FF3333',redColor:"#FF3333",
-          redFrom: 90, redTo: 200,
+          redFrom: 110, redTo: 200,
           yellowFrom:0, yellowTo: 50,
-          greenFrom:50,greenTo:90,
+          greenFrom:50,greenTo:110,
           minorTicks: 20 , max :200
         };
       function beat() {
@@ -368,10 +392,32 @@ canvas {
            $.each(res.data,function(){
             gaugeData.setValue(0, 0, this.temp);
             gauge.draw(gaugeData, gaugeOptions);
+            if(this.temp >= 37 || this.temp < 32){
+              $("#templed").css('background-color','#FF0033');
+              $("#templed").css('box-shadow','0px 0px 20px #FF0000');
+            }else{
+              $("#templed").css('background-color','#00CC00');
+              $("#templed").css('box-shadow','0px 0px 20px #00CC00');
+            }
             gaugeData2.setValue(0, 0, this.oxygen);
             gauge2.draw(gaugeData2, gaugeOptions2);
+            if(this.oxygen < 94){
+              $("#oxled").css('background-color','#FF0033');
+              $("#oxled").css('box-shadow','0px 0px 20px #FF0000');
+            }else{
+              $("#oxled").css('background-color','#00CC00');
+              $("#oxled").css('box-shadow','0px 0px 20px #00CC00');
+            }
+
             gaugeData3.setValue(0, 0, this.beat);
             gauge3.draw(gaugeData3, gaugeOptions3);
+            if(this.beat > 110 || this.beat < 60 ){
+              $("#beatled").css('background-color','#FF0033');
+              $("#beatled").css('box-shadow','0px 0px 20px #FF0000');
+            }else{
+              $("#beatled").css('background-color','#00CC00');
+              $("#beatled").css('box-shadow','0px 0px 20px #00CC00');
+            }
            });
           },
           error:function(e){
